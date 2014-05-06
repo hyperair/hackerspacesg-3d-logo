@@ -6,8 +6,6 @@ SCADFILES = hsgbanner.scad hsgbanner-base.scad hsgbanner-fg.scad
 STLFILES = $(SCADFILES:.scad=.stl)
 DEPFILES = $(addsuffix deps,$(SCADFILES))
 
--include $(DEPFILES)
-
 all: $(STLFILES)
 
 %.dxf: %.svg
@@ -18,3 +16,5 @@ all: $(STLFILES)
 
 clean:
 	rm $(STLFILES) $(DEPFILES)
+
+-include $(DEPFILES)
