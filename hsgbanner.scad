@@ -1,6 +1,6 @@
 text_thickness = 5;
 base_thickness = 3;
-text_hole_depth = 1;
+text_hole_depth = 2;
 base_thickness_in_hole = base_thickness - text_hole_depth;
 border_thickness = text_thickness;
 border_width = 2;
