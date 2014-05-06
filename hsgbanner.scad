@@ -1,3 +1,4 @@
+color("red")
 linear_extrude(height=5)
 difference() {
     import("hsgbanner.dxf", layer="background");
