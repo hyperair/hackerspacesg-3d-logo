@@ -5,6 +5,8 @@ base_thickness_in_hole = base_thickness - text_hole_depth;
 border_thickness = text_thickness;
 border_width = 2;
 
+keyring_hole_radius = 3;
+
 module hsgbanner_bg() {
     import("hsgbanner.dxf", layer="background");
 }
@@ -36,6 +38,11 @@ module hsgbanner_base() {
 
                 sphere(r=0.05, center=true, $fn=3);
             }
+        }
+
+        if (keyring_hole_radius > 0) {
+            translate([6.5, 6.5, -0.1])
+            cylinder(r=keyring_hole_radius, h=base_thickness + 0.2, $fn=20);
         }
     }
 }
