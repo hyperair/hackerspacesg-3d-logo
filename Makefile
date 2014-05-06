@@ -5,7 +5,7 @@ OPENSCAD = openscad
 all: hsgbanner.stl
 
 %.dxf: %.svg
-	$(DXF_OUTLINES) -P true --units='25.4/90' --encoding=latin1 $< > $@
+	$(DXF_OUTLINES) --units='25.4/90' --encoding=latin1 $< > $@
 
 %.stl: %.scad
 	$(OPENSCAD) -m $(MAKE) -o $@ $<
