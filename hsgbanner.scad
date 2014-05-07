@@ -1,13 +1,28 @@
-text_thickness = 5;
-base_thickness = 3;
-text_hole_depth = 2;
+text_thickness = 1;
+base_thickness = 0.5;
+text_hole_depth = min(0.5 * base_thickness, 2);
 base_thickness_in_hole = base_thickness - text_hole_depth;
 border_thickness = text_thickness;
-border_width = 2;
+border_width = 0.5;
 
-keyring_hole_radius = 3;
+// original dimensions. FIXME: Use dxf_dim to get these out
+orig_length = 195.324;
+orig_breadth = 35.712;
+orig_hole_position = [6.5, 6.5];
+orig_hole_radius = 3;
+
+target_length = 50;
+
+scale_factor = target_length / orig_length;
+hole_position = orig_hole_position * scale_factor;
+hole_radius = orig_hole_radius * scale_factor;
+
+module hsgbanner_scale() {
+    scale([scale_factor, scale_factor, scale_factor]) children();
+}
 
 module hsgbanner_bg() {
+    hsgbanner_scale()
     import("hsgbanner.dxf", layer="background");
 }
 
@@ -40,16 +55,18 @@ module hsgbanner_base() {
             }
         }
 
-        if (keyring_hole_radius > 0) {
-            translate([6.5, 6.5, -0.1])
-            cylinder(r=keyring_hole_radius, h=base_thickness + 0.2, $fn=20);
+        if (hole_radius > 0) {
+            translate([hole_position[0], hole_position[1], -0.1])
+            cylinder(r=hole_radius, h=base_thickness + 0.2, $fn=20);
         }
     }
 }
 
 module hsgbanner_fg() {
-    import("hsgbanner.dxf", layer="text");
-    import("hsgbanner.dxf", layer="stars");
+    hsgbanner_scale() {
+        import("hsgbanner.dxf", layer="text");
+        import("hsgbanner.dxf", layer="stars");
+    }
 }
 
 module hsgbanner_extruded_fg() {
@@ -67,3 +84,6 @@ hsgbanner_base();
 
 hsgbanner_place_fg()
 hsgbanner_extruded_fg();
+
+// ruler showing original size
+*cube([orig_length, orig_breadth, max(text_thickness, border_thickness)]);
