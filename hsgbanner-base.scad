@@ -1,3 +1,6 @@
 use <hsgbanner.scad>
 
-hsgbanner_base();
+difference() {
+    hsgbanner_base();
+    hsgbanner_fg_holes();
+}
