@@ -3,7 +3,7 @@ base_thickness = 1;
 text_hole_depth = min(0.5 * base_thickness, 2);
 base_thickness_in_hole = base_thickness - text_hole_depth;
 border_thickness = text_thickness;
-border_width = 2;
+border_width = 1;
 
 // original dimensions. FIXME: Use dxf_dim to get these out
 orig_length = 195.324;
